@@ -3,6 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.oliverbotello.hms.peopledex">
 
+    <!--Camera permission-->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!--Internet permission-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!--Network status obtaining permission-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!--Wi-Fi status obtaining permission-->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
