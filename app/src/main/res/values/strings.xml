@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">PeopleDex</string>
     <string name="api_key">DAEDAPKX+EdYCcsnfMvmfz2SJmaohtO4WVpPqxuF3/04Xzniqt2AH+BaWKCibDVZ4d5A9vbz6naSwVnt4o0PQNhBFBpDZFx/6BWliw==</string>
+    <string name="person_label">PERSON</string>
 </resources>

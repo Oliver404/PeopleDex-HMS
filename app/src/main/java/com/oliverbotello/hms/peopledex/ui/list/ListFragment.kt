@@ -1,4 +1,4 @@
-package com.oliverbotello.hms.peopledex.list
+package com.oliverbotello.hms.peopledex.ui.list
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -6,10 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.appcompat.widget.AppCompatImageView
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+import com.oliverbotello.hms.peopledex.PicturesHelper
 import com.oliverbotello.hms.peopledex.R
-import com.oliverbotello.hms.peopledex.camera.CameraFragment
+import com.oliverbotello.hms.peopledex.ui.camera.CameraFragment
 
 class ListFragment : Fragment(), View.OnClickListener {
 
@@ -24,6 +25,11 @@ class ListFragment : Fragment(), View.OnClickListener {
         savedInstanceState: Bundle?
     ): View? {
         return initView(inflater, container)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        requireView().findViewById<AppCompatImageView>(R.id.imgvw_preview).setImageBitmap(PicturesHelper().getImage("oli.jpg"))
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

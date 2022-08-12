@@ -1,4 +1,4 @@
-package com.oliverbotello.hms.peopledex.list
+package com.oliverbotello.hms.peopledex.ui.list
 
 import androidx.lifecycle.ViewModel
 

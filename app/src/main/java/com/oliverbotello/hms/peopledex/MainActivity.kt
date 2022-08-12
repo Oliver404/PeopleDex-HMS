@@ -5,9 +5,8 @@ import android.os.Bundle
 import com.oliverbotello.hms.peopledex.utils.RequestPermissions
 import android.Manifest
 import android.view.Window
-import android.view.WindowManager
 import android.widget.Toast
-import com.oliverbotello.hms.peopledex.list.ListFragment
+import com.oliverbotello.hms.peopledex.ui.list.ListFragment
 
 class MainActivity : AppCompatActivity() {
     private val managerPermissions: RequestPermissions =
