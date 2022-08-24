@@ -10,14 +10,17 @@ import androidx.core.util.valueIterator
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import com.huawei.hms.mlsdk.common.LensEngine
 import com.huawei.hms.mlsdk.face.MLFace
 import com.oliverbotello.hms.peopledex.R
+import com.oliverbotello.hms.peopledex.ui.verify.VerifyFragment
 import com.oliverbotello.hms.peopledex.utils.OFF_SET
 
 
 class CameraFragment : Fragment(), SurfaceHolder.Callback,
-    CameraViewModel.OnDrawChange, CameraViewModel.OnFaceDetect {
+    CameraViewModel.OnDrawChange, CameraViewModel.OnFaceDetect,
+    Observer<String> {
 
     companion object {
         fun newInstance() = CameraFragment()
@@ -41,6 +44,7 @@ class CameraFragment : Fragment(), SurfaceHolder.Callback,
         viewModel = ViewModelProvider(this)[CameraViewModel::class.java]
         viewModel.drawListener = this
         viewModel.faceDetect = this
+        viewModel.setNavitionObserver(viewLifecycleOwner, this)
     }
 
     private fun initView(inflater: LayoutInflater, container: ViewGroup?): View {
@@ -125,7 +129,7 @@ class CameraFragment : Fragment(), SurfaceHolder.Callback,
 
     override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {
         lensEngine = LensEngine.Creator(context, viewModel.analyzer)
-            .setLensType(LensEngine.FRONT_LENS)
+            .setLensType(LensEngine.BACK_LENS)
             .applyDisplayDimension(height - OFF_SET.toInt(), width - OFF_SET.toInt())
             .applyFps(30.0f)
             .enableAutomaticFocus(true)
@@ -147,5 +151,12 @@ class CameraFragment : Fragment(), SurfaceHolder.Callback,
         lensEngine.photograph(viewModel, viewModel)
         lensEngine.release()
         parentFragmentManager.popBackStack()
+    }
+
+    override fun onChanged(t: String?) {
+        t?.let {
+            Navigation.findNavController(this.requireView())
+                .navigate(R.id.action_cameraFragment_to_verifyFragment)
+        }
     }
 }

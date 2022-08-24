@@ -15,11 +15,10 @@ class PicturesHelper {
         }
     }
 
-    fun saveImage(byteArray: ByteArray): String {
+    fun saveImage(imageName: String = "oli.jpg", byteArray: ByteArray): String {
         if (FILES_DIR == null) throw Exception("PicturesHelper is not init")
 
-        val imageName: String = "oli.jpg"
-        val imgFile = File("${FILES_DIR}/${imageName}")
+        val imgFile: File = File("${FILES_DIR}/${imageName}")
 
         imgFile.writeBytes(byteArray)
 

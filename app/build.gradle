@@ -48,10 +48,19 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.2'
+    def nav_version = "2.5.1"
+
+    implementation 'androidx.core:core-ktx:1.8.0'
+    implementation 'androidx.appcompat:appcompat:1.5.0'
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    
+    /*---------*/
+    /* JETPACK */
+    /*---------*/
+    // Navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
     // Huawei
     implementation 'com.huawei.agconnect:agconnect-core:1.7.0.300'
@@ -63,6 +72,13 @@ dependencies {
     implementation 'com.huawei.hms:ml-computer-vision-face-emotion-model:3.5.0.302'
     // Import the facial feature detection model package.
     implementation 'com.huawei.hms:ml-computer-vision-face-feature-model:3.5.0.302'
+    // Import the base SDK for face verification
+    implementation 'com.huawei.hms:ml-computer-vision-faceverify:3.6.0.304'
+    implementation 'com.huawei.hms:ml-computer-vision-faceverify-model:3.6.0.304'
+    // Import the base SDK for computer voice
+    implementation 'com.huawei.hms:ml-computer-voice-tts:3.6.0.300'
+    // Import the bee voice package.
+    implementation 'com.huawei.hms:ml-computer-voice-tts-model-bee:3.6.0.300'
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'

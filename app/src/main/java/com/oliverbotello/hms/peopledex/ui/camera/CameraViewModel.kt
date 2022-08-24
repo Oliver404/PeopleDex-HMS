@@ -2,6 +2,9 @@ package com.oliverbotello.hms.peopledex.ui.camera
 
 import android.util.Log
 import android.util.SparseArray
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import com.huawei.hms.mlsdk.MLAnalyzerFactory
 import com.huawei.hms.mlsdk.common.LensEngine
@@ -26,12 +29,17 @@ class CameraViewModel : ViewModel(), MLAnalyzer.MLTransactor<MLFace?>,
         private set
 //    private var analyzerDefault: MLFaceAnalyzer = MLAnalyzerFactory.getInstance().getFaceAnalyzer()
 //    private val facesData: SparseArray<MLFace?> = SparseArray<MLFace?>()
-    val automatic: Boolean = false
+    private val automatic: Boolean = true
     var drawListener: OnDrawChange? = null
     var faceDetect: OnFaceDetect? = null
+    private val params: MutableLiveData<String> = MutableLiveData(null)
 
     init {
         analyzer.setTransactor(this)
+    }
+
+    fun setNavitionObserver(lifecycleOwner: LifecycleOwner, observer: Observer<String>): Unit {
+        params.observe(lifecycleOwner, observer)
     }
 
     /*
@@ -65,7 +73,9 @@ class CameraViewModel : ViewModel(), MLAnalyzer.MLTransactor<MLFace?>,
 
     override fun takenPhotograph(biteArray: ByteArray?) {
         biteArray?.let {
-            PicturesHelper().saveImage(it)
+            PicturesHelper().saveImage("oli.jpg", it)
+            analyzer.stop()
+            params.value = "oli.jpg"
         }
     }
 }

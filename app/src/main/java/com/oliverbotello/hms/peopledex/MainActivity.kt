@@ -20,12 +20,6 @@ class MainActivity : AppCompatActivity() {
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         setContentView(R.layout.activity_main)
         managerPermissions.verifyPermissions()
-
-        if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.frmlyt_frame, ListFragment.newInstance())
-                .commitNow()
-        }
     }
 
     override fun onRequestPermissionsResult(
