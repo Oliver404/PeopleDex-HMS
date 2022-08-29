@@ -15,6 +15,14 @@ class PicturesHelper {
         }
     }
 
+    fun renameImage(oldName: String, newName: String) {
+        if (FILES_DIR == null) throw Exception("PicturesHelper is not init")
+
+        val imgFile: File = File("${FILES_DIR}/${oldName}")
+        val newFile: File = File("${FILES_DIR}/${newName}")
+        imgFile.renameTo(newFile)
+    }
+
     fun saveImage(imageName: String = "oli.jpg", byteArray: ByteArray): String {
         if (FILES_DIR == null) throw Exception("PicturesHelper is not init")
 

@@ -2,11 +2,12 @@ package com.oliverbotello.hms.peopledex.ui.camera
 
 import android.graphics.*
 import android.os.Bundle
-import android.util.Log
 import android.util.SparseArray
 import android.view.*
+import androidx.appcompat.widget.AppCompatButton
 import androidx.core.graphics.scale
 import androidx.core.util.valueIterator
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -14,13 +15,11 @@ import androidx.navigation.Navigation
 import com.huawei.hms.mlsdk.common.LensEngine
 import com.huawei.hms.mlsdk.face.MLFace
 import com.oliverbotello.hms.peopledex.R
-import com.oliverbotello.hms.peopledex.ui.verify.VerifyFragment
 import com.oliverbotello.hms.peopledex.utils.OFF_SET
-
 
 class CameraFragment : Fragment(), SurfaceHolder.Callback,
     CameraViewModel.OnDrawChange, CameraViewModel.OnFaceDetect,
-    Observer<String> {
+    Observer<Any>, View.OnClickListener {
 
     companion object {
         fun newInstance() = CameraFragment()
@@ -28,6 +27,7 @@ class CameraFragment : Fragment(), SurfaceHolder.Callback,
 
     private lateinit var surfaceCamera: SurfaceView
     private lateinit var surfacePaint: SurfaceView
+    private lateinit var btnTakePicture: AppCompatButton
     private lateinit var viewModel: CameraViewModel
     private lateinit var lensEngine: LensEngine
 
@@ -44,16 +44,20 @@ class CameraFragment : Fragment(), SurfaceHolder.Callback,
         viewModel = ViewModelProvider(this)[CameraViewModel::class.java]
         viewModel.drawListener = this
         viewModel.faceDetect = this
-        viewModel.setNavitionObserver(viewLifecycleOwner, this)
+
+        viewModel.setNavitionObserver(viewLifecycleOwner, this as Observer<String>)
+        viewModel.setAvailableObserver(viewLifecycleOwner, this as Observer<Boolean>)
     }
 
     private fun initView(inflater: LayoutInflater, container: ViewGroup?): View {
         val root = inflater.inflate(R.layout.fragment_camera, container, false)
         surfaceCamera = root.findViewById(R.id.srfcvw_camera)
         surfacePaint = root.findViewById(R.id.srfcvw_paint)
+        btnTakePicture = root.findViewById(R.id.btn_take_picture)
 
         surfacePaint.holder.setFormat(PixelFormat.TRANSPARENT)
         surfaceCamera.holder.addCallback(this)
+        btnTakePicture.setOnClickListener(this)
 
         return root
     }
@@ -141,22 +145,28 @@ class CameraFragment : Fragment(), SurfaceHolder.Callback,
     override fun surfaceDestroyed(holder: SurfaceHolder) {}
 
     override fun onDrawChange(data: SparseArray<MLFace?>) {
-        if (data.size() > 0)
-            Log.e("Oliver404", data[0]?.features?.age.toString())
-
         draw(data)
     }
 
     override fun onFaceDetect() {
         lensEngine.photograph(viewModel, viewModel)
         lensEngine.release()
-        parentFragmentManager.popBackStack()
     }
 
-    override fun onChanged(t: String?) {
+    override fun onChanged(t: Any?) {
         t?.let {
-            Navigation.findNavController(this.requireView())
-                .navigate(R.id.action_cameraFragment_to_verifyFragment)
+            if (t is String)
+                Navigation.findNavController(this.requireView())
+                    .navigate(R.id.action_cameraFragment_to_verifyFragment)
+            else if (t is Boolean)
+                btnTakePicture.isEnabled = t
         }
+    }
+
+    /*
+    * View.OnClickListener
+    * */
+    override fun onClick(v: View?) {
+        lensEngine.photograph(viewModel, viewModel)
     }
 }

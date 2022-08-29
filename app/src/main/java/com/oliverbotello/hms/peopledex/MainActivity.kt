@@ -7,6 +7,7 @@ import android.Manifest
 import android.view.Window
 import android.widget.Toast
 import com.oliverbotello.hms.peopledex.ui.list.ListFragment
+import com.oliverbotello.hms.peopledex.ui.splash.SplashFragment
 
 class MainActivity : AppCompatActivity() {
     private val managerPermissions: RequestPermissions =
@@ -20,6 +21,12 @@ class MainActivity : AppCompatActivity() {
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         setContentView(R.layout.activity_main)
         managerPermissions.verifyPermissions()
+
+//        if (savedInstanceState == null) {
+//            supportFragmentManager.beginTransaction()
+//                .replace(R.id.frmlyt_frame, SplashFragment.newInstance())
+//                .commitNow()
+//        }
     }
 
     override fun onRequestPermissionsResult(

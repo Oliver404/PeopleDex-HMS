@@ -3,11 +3,15 @@
     <string name="api_key">DAEDAPKX+EdYCcsnfMvmfz2SJmaohtO4WVpPqxuF3/04Xzniqt2AH+BaWKCibDVZ4d5A9vbz6naSwVnt4o0PQNhBFBpDZFx/6BWliw==</string>
     <string name="person_label">PERSON</string>
 
-    <string name="who_is">¿Quién es esa persona?</string>
+    <string name="who_is">¿Quien es esa persona?</string>
     <string name="it_is">Es …</string>
     <string name="new_person">Nueva persona encontrada</string>
     <string name="what_is_the_name">¿Cuál es su nombre?</string>
     <string name="how_old">¿Cuál es su edad?</string>
     <string name="share_description">De una pequeña descripción de la persona</string>
     <string name="registered_person">Persona registrada en la Dex</string>
+    <string name="capture">Capturar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="name">Nombre</string>
+    <string name="description">Descripcion</string>
 </resources>

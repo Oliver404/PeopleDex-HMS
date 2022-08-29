@@ -27,7 +27,7 @@
         <!-- Automatically Updating the Machine Learning Model-->
         <meta-data
             android:name="com.huawei.hms.ml.DEPENDENCY"
-            android:value="faceverify"/>
+            android:value="face"/>
         <!-- Automatically Updating the Machine Learning Model-->
 <!--        <meta-data-->
 <!--            android:name="com.huawei.hms.ml.DEPENDENCY"-->

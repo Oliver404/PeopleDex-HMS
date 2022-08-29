@@ -1,11 +1,5 @@
-package com.oliverbotello.hms.peopledex
+package com.oliverbotello.hms.peopledex.utils
 
-import android.content.Context
-import android.os.Bundle
-import android.util.Log
-import android.util.Pair
-import android.widget.Toast
-import com.google.android.material.snackbar.Snackbar
 import com.huawei.hmf.tasks.OnFailureListener
 import com.huawei.hmf.tasks.OnSuccessListener
 import com.huawei.hms.mlsdk.model.download.MLLocalModelManager
@@ -18,12 +12,12 @@ class TextToSpeechService() {
         private var ENGINE: MLTtsEngine? = null
 
         fun validateModel(
-            model: String,
+            modelName: String,
             successListener: OnSuccessListener<Boolean>,
             failureListener: OnFailureListener
         ) {
             val localModelManager = MLLocalModelManager.getInstance()
-            val model = MLTtsLocalModel.Factory(model).create()
+            val model = MLTtsLocalModel.Factory(modelName).create()
 
             localModelManager.isModelExist(model)
                 .addOnSuccessListener(successListener)
@@ -31,22 +25,17 @@ class TextToSpeechService() {
         }
 
         fun downloadModel(
-            person: String,
+            modelName: String,
             downloadListener: MLModelDownloadListener,
             successListener: OnSuccessListener<Void>,
             failureListener: OnFailureListener
         ) {
-            // Create an on-device TTS model manager.
             val localModelManager = MLLocalModelManager.getInstance()
-            // Create an MLTtsLocalModel instance and pass the speaker (indicating by person) to download the language model corresponding to the speaker.
-            val model = MLTtsLocalModel.Factory(person).create()
-            // Create a download policy configurator. You can set that when any of the following conditions is met, the model can be downloaded: 1. The device is charging; 2. Wi-Fi is connected; 3. The device is idle.
+            val model = MLTtsLocalModel.Factory(modelName).create()
             val request = MLModelDownloadStrategy.Factory().needWifi()
                 .create()
-            // Create a download progress listener for the on-device model.
-            val modelDownloadListener = downloadListener
-            // Call the download API of the on-device model manager.
-            localModelManager.downloadModel(model, request, modelDownloadListener)
+
+            localModelManager.downloadModel(model, request, downloadListener)
                 .addOnSuccessListener(successListener)
                 .addOnFailureListener(failureListener)
         }
@@ -55,8 +44,7 @@ class TextToSpeechService() {
     init {
         if (ENGINE == null) {
             val mlTtsConfig = MLTtsConfig()
-                .setLanguage(MLTtsConstants.TTS_LAN_ES_ES) // Set the speaker
-                // Set the TTS mode to on-device mode
+                .setLanguage(MLTtsConstants.TTS_LAN_ES_ES)
                 .setPerson(MLTtsConstants.TTS_SPEAKER_OFFLINE_ES_ES_FEMALE_BEE)
                 .setSynthesizeMode(MLTtsConstants.TTS_OFFLINE_MODE)
             ENGINE = MLTtsEngine(mlTtsConfig)

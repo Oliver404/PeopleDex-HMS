@@ -9,7 +9,7 @@ import com.huawei.hmf.tasks.OnFailureListener
 import com.huawei.hmf.tasks.OnSuccessListener
 import com.huawei.hms.mlsdk.model.download.MLModelDownloadListener
 import com.huawei.hms.mlsdk.tts.MLTtsConstants
-import com.oliverbotello.hms.peopledex.TextToSpeechService
+import com.oliverbotello.hms.peopledex.utils.TextToSpeechService
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope

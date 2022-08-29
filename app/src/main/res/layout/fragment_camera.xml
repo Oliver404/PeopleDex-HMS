@@ -24,4 +24,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_take_picture"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:background="@drawable/dex_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="@dimen/xxlg_margin"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

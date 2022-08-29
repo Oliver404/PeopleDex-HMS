@@ -27,7 +27,14 @@
         android:id="@+id/verifyFragment"
         android:name="com.oliverbotello.hms.peopledex.ui.verify.VerifyFragment"
         android:label="fragment_verify"
-        tools:layout="@layout/fragment_verify" />
+        tools:layout="@layout/fragment_verify" >
+        <action
+            android:id="@+id/action_verifyFragment_to_captureFragment"
+            app:destination="@id/captureFragment" />
+        <action
+            android:id="@+id/action_verifyFragment_to_listFragment2"
+            app:destination="@id/listFragment" />
+    </fragment>
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.oliverbotello.hms.peopledex.ui.splash.SplashFragment"
@@ -37,4 +44,9 @@
             android:id="@+id/action_splashFragment_to_listFragment"
             app:destination="@id/listFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/captureFragment"
+        android:name="com.oliverbotello.hms.peopledex.ui.capture.CaptureFragment"
+        android:label="fragment_capture"
+        tools:layout="@layout/fragment_capture" />
 </navigation>
