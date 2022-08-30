@@ -1,6 +1,8 @@
 package com.oliverbotello.hms.peopledex.ui.camera
 
+import android.os.Bundle
 import android.util.SparseArray
+import androidx.core.os.bundleOf
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -11,6 +13,7 @@ import com.huawei.hms.mlsdk.common.MLAnalyzer
 import com.huawei.hms.mlsdk.face.MLFace
 import com.huawei.hms.mlsdk.face.MLFaceAnalyzer
 import com.huawei.hms.mlsdk.face.MLFaceAnalyzerSetting
+import com.huawei.hms.mlsdk.face.MLFaceEmotion
 import com.oliverbotello.hms.peopledex.PicturesHelper
 import com.oliverbotello.hms.peopledex.utils.AUX_NPICTURE
 import kotlinx.coroutines.DelicateCoroutinesApi
@@ -24,8 +27,10 @@ class CameraViewModel : ViewModel(), MLAnalyzer.MLTransactor<MLFace?>,
 //    private var analyzerDefault: MLFaceAnalyzer = MLAnalyzerFactory.getInstance().getFaceAnalyzer()
     var drawListener: OnDrawChange? = null
     var faceDetect: OnFaceDetect? = null
-    private val params: MutableLiveData<String> = MutableLiveData(null)
+    private val params: MutableLiveData<Bundle> = MutableLiveData(null)
     private val available: MutableLiveData<Boolean> = MutableLiveData(false)
+    private var type: String = "NORMAL"
+    private var gender: String = "MAN"
 
     init {
         val setting = MLFaceAnalyzerSetting.Factory() // Set whether to detect key face points.
@@ -42,7 +47,7 @@ class CameraViewModel : ViewModel(), MLAnalyzer.MLTransactor<MLFace?>,
         analyzer.setTransactor(this)
     }
 
-    fun setNavitionObserver(lifecycleOwner: LifecycleOwner, observer: Observer<String>) {
+    fun setNavitionObserver(lifecycleOwner: LifecycleOwner, observer: Observer<Bundle>) {
         params.observe(lifecycleOwner, observer)
     }
 
@@ -56,14 +61,59 @@ class CameraViewModel : ViewModel(), MLAnalyzer.MLTransactor<MLFace?>,
             available.value = isAvailable
         }
     }
+
+    private fun setGender(sexProbability: Float) {
+        gender = if (sexProbability > .5f) "WOMAN" else "MAN"
+    }
+
+    private fun setType(emotions: MLFaceEmotion) {
+        var probability = emotions.smilingProbability
+        type = "SMILING"
+
+        if (emotions.neutralProbability > probability) {
+            probability = emotions.neutralProbability
+            type = "NEUTRAL"
+        }
+
+        if (emotions.angryProbability > probability) {
+            probability = emotions.angryProbability
+            type = "ANGRY"
+        }
+
+        if (emotions.disgustProbability > probability) {
+            probability = emotions.disgustProbability
+            type = "DISGUST"
+        }
+
+        if (emotions.fearProbability > probability) {
+            probability = emotions.fearProbability
+            type = "FEAR"
+        }
+
+        if (emotions.sadProbability > probability) {
+            probability = emotions.sadProbability
+            type = "SAD"
+        }
+
+        if (emotions.surpriseProbability > probability) {
+            probability = emotions.surpriseProbability
+            type = "SURPRISE"
+        }
+    }
     /*
     * MLAnalyzer.MLTransactor<MLFace?>
     * */
     override fun transactResult(result: MLAnalyzer.Result<MLFace?>) {
         val faces = result.analyseList
 
+        faces[0]?.let {
+            setGender(it.features.sexProbability)
+            setType(it.emotions)
+        }
+
         setAvailableValue(faces.size() > 0)
         drawListener?.onDrawChange(faces)
+
     }
 
     override fun destroy() {
@@ -81,7 +131,7 @@ class CameraViewModel : ViewModel(), MLAnalyzer.MLTransactor<MLFace?>,
         bteArray?.let {
             PicturesHelper().saveImage(AUX_NPICTURE, bteArray)
 
-            params.value = AUX_NPICTURE
+            params.value = bundleOf("gender" to gender, "type" to type)
         }
     }
 

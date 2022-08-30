@@ -20,8 +20,12 @@ import com.huawei.hms.mlsdk.imgseg.MLImageSegmentationSetting
 import com.oliverbotello.hms.peopledex.PicturesHelper
 import com.oliverbotello.hms.peopledex.R
 import com.oliverbotello.hms.peopledex.utils.AUX_BPICTURE
+import com.oliverbotello.hms.peopledex.utils.AUX_NPICTURE
 import com.oliverbotello.hms.peopledex.utils.AUX_RPICTURE
 import com.oliverbotello.hms.peopledex.utils.TextToSpeechService
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.io.ByteArrayOutputStream
 
 
@@ -37,18 +41,27 @@ class VerifyViewModel : ViewModel(), OnSuccessListener<MLImageSegmentation>, OnF
     val isBussy: MutableLiveData<Boolean> = MutableLiveData(false)
 
     init {
-        picturesHelper.getImage("oli.jpg")?.let {
-            isBussy.value = true
-            val frame = MLFrame.fromBitmap(it)
+        GlobalScope.launch {
+            picturesHelper.getImage(AUX_NPICTURE)?.let {
+                setBussyValue(true)
+                val frame = MLFrame.fromBitmap(it)
 
-            analyzer.asyncAnalyseFrame(frame)
-                .addOnSuccessListener(this)
-                .addOnFailureListener(this)
+                analyzer.asyncAnalyseFrame(frame)
+                    .addOnSuccessListener(this@VerifyViewModel)
+                    .addOnFailureListener(this@VerifyViewModel)
+            }
         }
+
     }
 
     fun setBussyObserver(lifecycleOwner: LifecycleOwner, observer: Observer<Boolean>) {
         isBussy.observe(lifecycleOwner, observer)
+    }
+
+    private fun setBussyValue(value: Boolean) {
+        GlobalScope.launch(Dispatchers.Main) {
+            isBussy.value = value
+        }
     }
 
     private fun makeBlackImage(picture: Bitmap) {
@@ -72,7 +85,7 @@ class VerifyViewModel : ViewModel(), OnSuccessListener<MLImageSegmentation>, OnF
         picturesHelper.saveImage(AUX_RPICTURE, stream.toByteArray())
         makeBlackImage(picture)
 
-        isBussy.value = false
+        setBussyValue(false)
 
         TextToSpeechService().talk("Quien es esa persona?!")
     }

@@ -104,8 +104,10 @@ class VerifyFragment : Fragment(), VerifyViewModel.OnImageMade,
         v?.let {
             when(v.id) {
                 R.id.btn_capture ->
-                    Navigation.findNavController(requireView())
-                        .navigate(R.id.action_verifyFragment_to_captureFragment)
+                    Navigation.findNavController(requireView()).navigate(
+                        R.id.action_verifyFragment_to_captureFragment,
+                        this@VerifyFragment.arguments
+                    )
                 R.id.btn_cancel ->
                     Navigation.findNavController(requireView())
                         .navigate(R.id.action_verifyFragment_to_listFragment2)

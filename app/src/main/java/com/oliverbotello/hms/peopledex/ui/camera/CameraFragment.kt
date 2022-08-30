@@ -45,7 +45,7 @@ class CameraFragment : Fragment(), SurfaceHolder.Callback,
         viewModel.drawListener = this
         viewModel.faceDetect = this
 
-        viewModel.setNavitionObserver(viewLifecycleOwner, this as Observer<String>)
+        viewModel.setNavitionObserver(viewLifecycleOwner, this as Observer<Bundle>)
         viewModel.setAvailableObserver(viewLifecycleOwner, this as Observer<Boolean>)
     }
 
@@ -155,9 +155,9 @@ class CameraFragment : Fragment(), SurfaceHolder.Callback,
 
     override fun onChanged(t: Any?) {
         t?.let {
-            if (t is String)
+            if (t is Bundle)
                 Navigation.findNavController(this.requireView())
-                    .navigate(R.id.action_cameraFragment_to_verifyFragment)
+                    .navigate(R.id.action_cameraFragment_to_verifyFragment, it as Bundle)
             else if (t is Boolean)
                 btnTakePicture.isEnabled = t
         }

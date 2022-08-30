@@ -8,9 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.oliverbotello.hms.peopledex.R
+import com.oliverbotello.hms.peopledex.model.PersonEnt
 
 class CaptureFragment : Fragment(), Observer<Any>, View.OnClickListener {
 
@@ -36,7 +38,9 @@ class CaptureFragment : Fragment(), Observer<Any>, View.OnClickListener {
 
         viewModel = ViewModelProvider(this).get(CaptureViewModel::class.java)
 
+        viewModel.setSavedInstance(arguments)
         viewModel.setBussyObserver(viewLifecycleOwner, this as Observer<Boolean>)
+        viewModel.setParamsObserver(viewLifecycleOwner, this as Observer<Bundle>)
         viewModel.setOnErrorObserver(viewLifecycleOwner, this as Observer<Pair<String?, String?>>)
     }
 
@@ -46,7 +50,7 @@ class CaptureFragment : Fragment(), Observer<Any>, View.OnClickListener {
         nameLayout = root.findViewById(R.id.txtinplyt_name)
         nameInput = root.findViewById(R.id.medttxt_name)
         descriptionLayout = root.findViewById(R.id.txtinplyt_description)
-        nameInput = root.findViewById(R.id.medttxt_description)
+        descriptionInput = root.findViewById(R.id.medttxt_description)
 
         root.findViewById<View>(R.id.btn_save_capture).setOnClickListener(this)
 
@@ -56,6 +60,12 @@ class CaptureFragment : Fragment(), Observer<Any>, View.OnClickListener {
     override fun onChanged(t: Any?) {
         if (t is Boolean)
             this.requireView().findViewById<View>(R.id.loading_capture).isVisible = t
+        else if (t is Bundle?) {
+            t?.let {
+                Navigation.findNavController(requireView())
+                    .navigate(R.id.action_captureFragment_to_savedFragment, it)
+            }
+        }
         else if (t is Pair<*, *>?){
 
             nameLayout.error = t?.first as String?

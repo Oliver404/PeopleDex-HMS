@@ -14,9 +14,11 @@
         <entry key="..\:/Development/Android/PeopleDex/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Development/Android/PeopleDex/app/src/main/res/layout/fragment_camera.xml" value="0.176" />
         <entry key="..\:/Development/Android/PeopleDex/app/src/main/res/layout/fragment_capture.xml" value="0.2" />
-        <entry key="..\:/Development/Android/PeopleDex/app/src/main/res/layout/fragment_list.xml" value="0.29791976225854383" />
+        <entry key="..\:/Development/Android/PeopleDex/app/src/main/res/layout/fragment_list.xml" value="1.0" />
+        <entry key="..\:/Development/Android/PeopleDex/app/src/main/res/layout/fragment_saved.xml" value="0.23229166666666667" />
         <entry key="..\:/Development/Android/PeopleDex/app/src/main/res/layout/fragment_splash.xml" value="0.176" />
         <entry key="..\:/Development/Android/PeopleDex/app/src/main/res/layout/fragment_verify.xml" value="0.2" />
+        <entry key="..\:/Development/Android/PeopleDex/app/src/main/res/layout/full_screen_loading_component.xml" value="0.23125" />
         <entry key="..\:/Development/Android/PeopleDex/app/src/main/res/layout/person_vh_layout.xml" value="0.7952622673434856" />
         <entry key="..\:/Development/Android/PeopleDex/app/src/main/res/mipmap-anydpi-v26/ic_las.xml" value="0.196" />
         <entry key="..\:/Development/Android/PeopleDex/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2125" />

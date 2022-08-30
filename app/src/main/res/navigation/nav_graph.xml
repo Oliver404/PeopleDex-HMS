@@ -48,5 +48,18 @@
         android:id="@+id/captureFragment"
         android:name="com.oliverbotello.hms.peopledex.ui.capture.CaptureFragment"
         android:label="fragment_capture"
-        tools:layout="@layout/fragment_capture" />
+        tools:layout="@layout/fragment_capture" >
+        <action
+            android:id="@+id/action_captureFragment_to_savedFragment"
+            app:destination="@id/savedFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/savedFragment"
+        android:name="com.oliverbotello.hms.peopledex.ui.saved.SavedFragment"
+        android:label="fragment_saved"
+        tools:layout="@layout/fragment_saved" >
+        <action
+            android:id="@+id/action_savedFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+    </fragment>
 </navigation>
