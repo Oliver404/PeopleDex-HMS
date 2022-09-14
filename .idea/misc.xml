@@ -9,12 +9,20 @@
         <entry key="..\:/Development/Android/PeopleDex/app/src/main/res/drawable/ic_las_foreground.xml" value="0.258" />
         <entry key="..\:/Development/Android/PeopleDex/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2125" />
         <entry key="..\:/Development/Android/PeopleDex/app/src/main/res/drawable/nothing.xml" value="0.258" />
+        <entry key="..\:/Development/Android/PeopleDex/app/src/main/res/drawable/ring_gradient.xml" value="0.195" />
+        <entry key="..\:/Development/Android/PeopleDex/app/src/main/res/drawable/ring_gradient_angry.xml" value="0.196" />
+        <entry key="..\:/Development/Android/PeopleDex/app/src/main/res/drawable/ring_gradient_disgust.xml" value="0.196" />
+        <entry key="..\:/Development/Android/PeopleDex/app/src/main/res/drawable/ring_gradient_fear.xml" value="0.196" />
+        <entry key="..\:/Development/Android/PeopleDex/app/src/main/res/drawable/ring_gradient_happy.xml" value="0.196" />
+        <entry key="..\:/Development/Android/PeopleDex/app/src/main/res/drawable/ring_gradient_neutral.xml" value="0.196" />
+        <entry key="..\:/Development/Android/PeopleDex/app/src/main/res/drawable/ring_gradient_sad.xml" value="0.196" />
+        <entry key="..\:/Development/Android/PeopleDex/app/src/main/res/drawable/ring_gradient_surprice.xml" value="0.196" />
         <entry key="..\:/Development/Android/PeopleDex/app/src/main/res/drawable/shape_gradiant.xml" value="0.215" />
         <entry key="..\:/Development/Android/PeopleDex/app/src/main/res/drawable/who_is_gradiant.xml" value="0.1265" />
         <entry key="..\:/Development/Android/PeopleDex/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Development/Android/PeopleDex/app/src/main/res/layout/fragment_camera.xml" value="0.176" />
         <entry key="..\:/Development/Android/PeopleDex/app/src/main/res/layout/fragment_capture.xml" value="0.2" />
-        <entry key="..\:/Development/Android/PeopleDex/app/src/main/res/layout/fragment_list.xml" value="1.0" />
+        <entry key="..\:/Development/Android/PeopleDex/app/src/main/res/layout/fragment_list.xml" value="0.264" />
         <entry key="..\:/Development/Android/PeopleDex/app/src/main/res/layout/fragment_saved.xml" value="0.23229166666666667" />
         <entry key="..\:/Development/Android/PeopleDex/app/src/main/res/layout/fragment_splash.xml" value="0.176" />
         <entry key="..\:/Development/Android/PeopleDex/app/src/main/res/layout/fragment_verify.xml" value="0.2" />

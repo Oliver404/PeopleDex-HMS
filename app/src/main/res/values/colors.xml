@@ -10,4 +10,13 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="background">#111111</color>
+
+
+    <color name="happy">#FFD65C</color>
+    <color name="neutral">#CFCFCF</color>
+    <color name="angry">#FF4848</color>
+    <color name="disgust">#5DFFA5</color>
+    <color name="fear">#995FFF</color>
+    <color name="sad">#5C97B1</color>
+    <color name="surprice">#F677FF</color>
 </resources>

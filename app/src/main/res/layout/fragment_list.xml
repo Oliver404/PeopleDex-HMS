@@ -17,13 +17,16 @@
         app:layout_constraintBottom_toTopOf="@id/rcclrvw_list">
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:background="@drawable/ring_gradient"
             android:id="@+id/imgvw_detail_person"
             android:layout_width="256dp"
             android:layout_height="256dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="@dimen/xxlg_margin"/>
+            android:layout_marginTop="@dimen/xxlg_margin"
+            android:src="@drawable/img_2"
+            android:elevation="8dp"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txtvw_detail_name"

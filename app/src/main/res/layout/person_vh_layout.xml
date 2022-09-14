@@ -50,7 +50,8 @@
             app:chipMinTouchTargetSize="@dimen/padding"
             app:chipMinHeight="12dp"
             android:textColor="@color/white"
-            android:text="Bonita"/>
+            android:text="Bonita"
+            android:clickable="false"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txtvw_person_number"

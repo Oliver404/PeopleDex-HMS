@@ -18,6 +18,9 @@ import com.google.android.material.chip.Chip
 import com.oliverbotello.hms.peopledex.PicturesHelper
 import com.oliverbotello.hms.peopledex.R
 import com.oliverbotello.hms.peopledex.model.PersonEnt
+import com.oliverbotello.hms.peopledex.utils.getResourceBackgroundForType
+import com.oliverbotello.hms.peopledex.utils.getResourceCodeForType
+
 
 class ListFragment : Fragment(), View.OnClickListener, Observer<Any> {
     companion object {
@@ -84,6 +87,11 @@ class ListFragment : Fragment(), View.OnClickListener, Observer<Any> {
 
         chpDetailType.text = person.type
         txtVwDetailDescription.text = person.description
+
+        imgvwDetailPerson.background = resources.getDrawable(getResourceBackgroundForType(person.type))
+
+        chpDetailType.setChipStrokeColorResource(getResourceCodeForType(person.type))
+        chpDetailType.setTextColor(resources.getColor(getResourceCodeForType(person.type)))
     }
 
     override fun onClick(v: View?) {

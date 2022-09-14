@@ -10,6 +10,7 @@ import com.google.android.material.imageview.ShapeableImageView
 import com.oliverbotello.hms.peopledex.PicturesHelper
 import com.oliverbotello.hms.peopledex.R
 import com.oliverbotello.hms.peopledex.model.PersonEnt
+import com.oliverbotello.hms.peopledex.utils.getResourceCodeForType
 
 class PersonVH(itemView: View, val onSelectListener: OnItemSelect<PersonEnt>?) : RecyclerView.ViewHolder(itemView), View.OnClickListener{
     companion object {
@@ -41,6 +42,9 @@ class PersonVH(itemView: View, val onSelectListener: OnItemSelect<PersonEnt>?) :
         txtvwNumber.text = "${bindPerson.id}"
         chpType.text = bindPerson.type
 
+        chpType.setBackgroundColor(
+            itemView.resources.getColor(getResourceCodeForType(bindPerson.type))
+        )
         image.setImageBitmap(PicturesHelper().getImage("${bindPerson.id}n.png"))
     }
 
